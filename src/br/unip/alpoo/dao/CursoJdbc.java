@@ -7,13 +7,10 @@ import br.unip.alpoo.util.DadosException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
-public class CursoJdbc implements ICursoDao {
+public class CursoJdbc {
 
-    private static String SQL_SELECT_POR_ID
+    /*private static String SQL_SELECT_POR_ID
             = "SELECT ID, TITULO, TIPO, DATA_REAL, QTDE_HORAS, SITUACAO "
             + " FROM TB_cursoS WHERE ID=?;";
 
@@ -199,5 +196,5 @@ public class CursoJdbc implements ICursoDao {
             instance = new CursoJdbc();
         }
         return instance;
-    }
+    }*/
 }

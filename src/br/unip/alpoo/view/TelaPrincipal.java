@@ -1,7 +1,5 @@
 package br.unip.alpoo.view;
 
-import br.unip.alpoo.dao.JpaUtil;
-import br.unip.alpoo.model.GerenciadorDeCursos;
 import br.unip.alpoo.view.cadastro.*;
 
 import java.awt.BorderLayout;
@@ -20,16 +18,16 @@ import javax.swing.JOptionPane;
 
 public class TelaPrincipal extends JFrame implements WindowListener{
 
-    private PainelBuscaAtividades painelBuscaAtividades;
+    //private PainelBuscaAtividades painelBuscaAtividades;
     
-    private GerenciadorDeCursos gerenciador;
+    //private GerenciadorDeCursos gerenciador;
 
     //implementacao do padrao Singleton
     private static TelaPrincipal instance;
     
     private TelaPrincipal() {
         
-        gerenciador = GerenciadorDeCursos.getInstance();
+        //gerenciador = GerenciadorDeCursos.getInstance();
 
         this.setTitle("Controle de Atividades");
         this.setSize(800, 300);
@@ -37,9 +35,9 @@ public class TelaPrincipal extends JFrame implements WindowListener{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.addWindowListener(this);
 
-        painelBuscaAtividades = PainelBuscaAtividades.getInstance();
+        //painelBuscaAtividades = PainelBuscaAtividades.getInstance();
 
-        this.add(painelBuscaAtividades, BorderLayout.CENTER);
+        //this.add(painelBuscaAtividades, BorderLayout.CENTER);
         this.setJMenuBar(montaMenu());
 
         this.setVisible(true);
@@ -68,6 +66,7 @@ public class TelaPrincipal extends JFrame implements WindowListener{
         itemsCadastro.put("Disciplina", CadastroDisciplina.getInstance());
         itemsCadastro.put("Aluno", CadastroAluno.getInstance());
         itemsCadastro.put("Professor", CadastroProfessor.getInstance());
+        montaItemsMenu(menuCadastro, itemsCadastro);
         
         JMenu menuMostrar = new JMenu("Mostrar");
         menuMostrar.setMnemonic(KeyEvent.VK_A);
@@ -88,7 +87,7 @@ public class TelaPrincipal extends JFrame implements WindowListener{
             }
         });
         
-        menuCadastro.add(itemSair);
+        menuSair.add(itemSair);
         
         barraMenu.add(menuCadastro);
         barraMenu.add(menuMostrar);
@@ -133,7 +132,6 @@ public class TelaPrincipal extends JFrame implements WindowListener{
 
     @Override
     public void windowClosed(WindowEvent e) {
-        JpaUtil.fechar();
     }
 
     @Override

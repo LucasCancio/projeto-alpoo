@@ -16,12 +16,9 @@ public class CadastroProfessor extends JFrame {
 		this.setTitle("Cadastro de Professores");
 		this.setSize(800, 300);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// painelBuscaAtividades = PainelBuscaAtividades.getInstance();
 
 		// this.add(painelBuscaAtividades, BorderLayout.CENTER);
-		this.setVisible(true);
-
 	}
 }

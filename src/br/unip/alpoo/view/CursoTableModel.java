@@ -6,21 +6,20 @@ import java.util.List;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-import br.unip.alpoo.model.AtividadeComplementar;
-import br.unip.alpoo.model.Situacao;
-import br.unip.alpoo.model.TipoAtividade;
+import br.unip.alpoo.model.Curso;
+import br.unip.alpoo.model.TipoCurso;
 
-public class AtividadeTableModel implements TableModel{
+public class CursoTableModel implements TableModel{
     
-    private List<AtividadeComplementar> atividades;
+    private List<Curso> cursos;
 
-    public AtividadeTableModel(List<AtividadeComplementar> atividades) {
-        this.atividades = atividades;
+    public CursoTableModel(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 
     @Override
     public int getRowCount() {
-        return atividades.size();
+        return cursos.size();
     }
 
     @Override
@@ -46,10 +45,9 @@ public class AtividadeTableModel implements TableModel{
         switch(coluna){
             case 0: return Integer.class;
             case 1: return String.class;
-            case 2: return TipoAtividade.class;
+            case 2: return TipoCurso.class;
             case 3: return String.class;
             case 4: return int.class;
-            case 5: return Situacao.class;
         }
         return void.class;
     }
@@ -61,16 +59,15 @@ public class AtividadeTableModel implements TableModel{
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        AtividadeComplementar atividadeAtual = atividades.get(linha);
-        switch(coluna){
-            case 0: return atividadeAtual.getId();
-            case 1: return atividadeAtual.getTitulo();
-            case 2: return atividadeAtual.getTipo();
-            case 3: Date data = atividadeAtual.getDataRealizacao();
+        Curso cursoAtual = cursos.get(linha);
+        /*switch(coluna){
+            case 0: return cursoAtual.getId();
+            case 1: return cursoAtual.getTitulo();
+            case 2: return cursoAtual.getTipo();
+            case 3: Date data = cursoAtual.getDataRealizacao();
                     return DateFormat.getDateInstance().format(data);
-            case 4: return atividadeAtual.getQtdeHoras();
-            case 5: return atividadeAtual.getSituacao();
-        }
+            case 4: return cursoAtual.getQtdeHoras();
+        }*/
         return null;
     }
 
@@ -86,12 +83,12 @@ public class AtividadeTableModel implements TableModel{
     public void removeTableModelListener(TableModelListener l) {
     }
     
-    AtividadeComplementar getAtividade(int linha){
-        return atividades.get(linha);
+   /* Curso getAtividade(int linha){
+        return cursos.get(linha);
     }
 
-    void setAtividades(List<AtividadeComplementar> atividades) {
-        this.atividades = atividades;
-    }
+    void setcursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }*/
     
 }
