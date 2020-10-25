@@ -12,8 +12,8 @@ public class GerenciadorConexao {
 
     private static final String URL
             = "jdbc:mysql://127.0.0.1:3306/sakila?zeroDateTimeBehavior=convertToNull&useTimezone=true&serverTimezone=UTC";
-    private static final String USUARIO = "aluno";
-    private static final String SENHA = "unip";
+    private static final String USUARIO = "root";
+    private static final String SENHA = "12345";
 
     public static Connection getConnection() throws DadosException {
         Connection connection = null;
@@ -22,7 +22,7 @@ public class GerenciadorConexao {
                     = DriverManager.getConnection(URL, USUARIO, SENHA);
         } catch (SQLException ex) {
             throw new DadosException(
-                    "NÃ£o foi possivel conectar ao banco de dados",
+                    "Não foi possivel conectar ao banco de dados",
                     ex);
         }
         return connection;
@@ -33,7 +33,7 @@ public class GerenciadorConexao {
             connection.close();
         } catch (SQLException ex) {
             throw new DadosException(
-                    "NÃ£o foi possivel desconectar ao banco de dados",
+                    "Não foi possivel desconectar ao banco de dados",
                     ex);
         }
     }
@@ -44,7 +44,7 @@ public class GerenciadorConexao {
             statement.close();
         } catch (SQLException ex) {
             throw new DadosException(
-                    "NÃ£o foi possivel desconectar ao banco de dados",
+                    "Não foi possivel desconectar ao banco de dados",
                     ex);
         } finally {
             GerenciadorConexao.fechar(connection);
@@ -58,7 +58,7 @@ public class GerenciadorConexao {
             resultSet.close();
         } catch (SQLException ex) {
             throw new DadosException(
-                    "NÃ£o foi possivel desconectar ao banco de dados",
+                    "Não foi possivel desconectar ao banco de dados",
                     ex);
         } finally {
             GerenciadorConexao.fechar(connection, statement);

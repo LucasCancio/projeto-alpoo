@@ -1,6 +1,7 @@
 package br.unip.alpoo.dao;
 
 import br.unip.alpoo.model.Curso;
+import br.unip.alpoo.model.NomesCursos;
 import br.unip.alpoo.model.TipoCurso;
 import br.unip.alpoo.util.DadosException;
 
@@ -8,11 +9,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CursoJdbc {
+public class CursoJdbc implements ICursoDao {
 
-    /*private static String SQL_SELECT_POR_ID
-            = "SELECT ID, TITULO, TIPO, DATA_REAL, QTDE_HORAS, SITUACAO "
-            + " FROM TB_cursoS WHERE ID=?;";
+    private static String SQL_SELECT_POR_ID
+            = "SELECT ID,NOME,TIPO,CARGA_HORARIA,COD_INSTITUTO "
+            + " FROM TB_CURSOS WHERE ID=?;";
+
 
     @Override
     public Curso getPorId(Integer id) throws DadosException {
@@ -26,16 +28,14 @@ public class CursoJdbc {
             statement.setInt(1, id);
             rs = statement.executeQuery();
             if (rs.next()) { //se tiver registro
-                String titulo = rs.getString("TITULO");
+                String nomeStr = rs.getString("NOME");
+                NomesCursos nomeCurso = NomesCursos.valueOf(nomeStr);
                 String tipoStr = rs.getString("TIPO");
-                Tipocurso tipo = Tipocurso.valueOf(tipoStr);
-                Date data = rs.getDate("DATA_REAL");
-                java.util.Date date
-                        = new java.util.Date(data.getTime());
-                int qtde = rs.getInt("QTDE_HORAS");
-                String situacaoStr = rs.getString("SITUACAO");
-                Situacao situacao = Situacao.valueOf(situacaoStr);
-                curso = new Curso(id, titulo, tipo, date, qtde, situacao);
+                TipoCurso tipoCurso = TipoCurso.valueOf(tipoStr);
+                int cargaHoraria = rs.getInt("CARGA_HORARIA");
+                String codInstituto = rs.getString("COD_INSTITUTO");
+               
+                curso= new Curso(id, nomeCurso, tipoCurso, cargaHoraria, codInstituto);
             }
         } catch (SQLException ex) {
             throw new DadosException(
@@ -46,32 +46,32 @@ public class CursoJdbc {
         return curso;
     }
     private static String SQL_SELECT_POR_TIPO
-            = "SELECT ID, TITULO, TIPO, DATA_REAL, QTDE_HORAS, SITUACAO "
-            + " FROM TB_cursoS WHERE TIPO = ?;";
+            = "SELECT ID,NOME,TIPO,CARGA_HORARIA,COD_INSTITUTO "
+            + " FROM TB_CURSOS WHERE TIPO = ?;";
 
+    
     @Override
     public List<Curso> getPorTipo(TipoCurso tipo) throws DadosException {
         Connection connection
                 = GerenciadorConexao.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
-        List<Curso> listacursos = new ArrayList<>();
+        List<Curso> listaCursos = new ArrayList<>();
         try {
             statement = connection.prepareStatement(SQL_SELECT_POR_TIPO);
             statement.setString(1, tipo.name());
             rs = statement.executeQuery();
             while (rs.next()) { //enquanto tiver *registros
                 int id = rs.getInt("ID");
-                String titulo = rs.getString("TITULO");
-                Date data = rs.getDate("DATA_REAL");
-                java.util.Date date
-                        = new java.util.Date(data.getTime());
-                int qtde = rs.getInt("QTDE_HORAS");
-                String situacaoStr = rs.getString("SITUACAO");
-                Situacao situacao = Situacao.valueOf(situacaoStr);
-                Curso curso = 
-                        new Curso(id, titulo, tipo, date, qtde, situacao);
-                listacursos.add(curso);
+                String nomeStr = rs.getString("NOME");
+                NomesCursos nomeCurso = NomesCursos.valueOf(nomeStr);
+                String tipoStr = rs.getString("TIPO");
+                TipoCurso tipoCurso = TipoCurso.valueOf(tipoStr);
+                int cargaHoraria = rs.getInt("CARGA_HORARIA");
+                String codInstituto = rs.getString("COD_INSTITUTO");
+               
+                Curso curso= new Curso(id, nomeCurso, tipoCurso, cargaHoraria, codInstituto);
+                listaCursos.add(curso);
             }
         } catch (SQLException ex) {
             throw new DadosException(
@@ -79,12 +79,12 @@ public class CursoJdbc {
         } finally {
             GerenciadorConexao.fechar(connection, statement, rs);
         }
-        return listacursos;
+        return listaCursos;
     }
 
     private static String SQL_SELECT_ALL
-            = "SELECT ID, TITULO, TIPO, DATA_REAL, QTDE_HORAS, SITUACAO "
-            + " FROM TB_cursoS;";
+            = "SELECT ID,NOME,TIPO,CARGA_HORARIA,COD_INSTITUTO "
+            + " FROM TB_CURSOS;";
 
     @Override
     public List<Curso> getTodas() throws DadosException {
@@ -92,22 +92,21 @@ public class CursoJdbc {
                 = GerenciadorConexao.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
-        List<Curso> listacursos = new ArrayList<>();
+        List<Curso> listaCursos = new ArrayList<>();
         try {
             statement = connection.prepareStatement(SQL_SELECT_ALL);
             rs = statement.executeQuery();
             while (rs.next()) { //enquanto tiver *registros
-                int id = rs.getInt("ID");
-                String titulo = rs.getString("TITULO");
-                String tipoStr = rs.getString("TIPO");
-                TipoCurso tipo = TipoCurso.valueOf(tipoStr);
-                Date data = rs.getDate("DATA_REAL");
-                java.util.Date date
-                        = new java.util.Date(data.getTime());
-                int qtde = rs.getInt("QTDE_HORAS");
-                String situacaoStr = rs.getString("SITUACAO");
-                Situacao situacao = Situacao.valueOf(situacaoStr);
-                Curso curso = new Curso(id, titulo, tipo, date, qtde, situacao);                listacursos.add(curso);
+            	 int id = rs.getInt("ID");
+                 String nomeStr = rs.getString("NOME");
+                 NomesCursos nomeCurso = NomesCursos.valueOf(nomeStr);
+                 String tipoStr = rs.getString("TIPO");
+                 TipoCurso tipoCurso = TipoCurso.valueOf(tipoStr);
+                 int cargaHoraria = rs.getInt("CARGA_HORARIA");
+                 String codInstituto = rs.getString("COD_INSTITUTO");
+                
+                 Curso curso= new Curso(id, nomeCurso, tipoCurso, cargaHoraria, codInstituto);
+                 listaCursos.add(curso);  
             }
         } catch (SQLException ex) {
             throw new DadosException(
@@ -115,12 +114,12 @@ public class CursoJdbc {
         } finally {
             GerenciadorConexao.fechar(connection, statement, rs);
         }
-        return listacursos;
+        return listaCursos;
     }
     private static String SQL_INSERT
-            = "INSERT INTO TB_cursoS (TITULO, TIPO, DATA_REAL, QTDE_HORAS, SITUACAO) "
-            + "VALUES (?, ?, ?, ?, ?);";
-                    // 1  2  3  4  5
+            = "INSERT INTO TB_CURSOS (NOME, TIPO, CARGA_HORARIA, COD_INSTITUTO) "
+            + "VALUES (?, ?, ?, ?);";
+                    // 1  2  3  4
 
     @Override
     public void incluir(Curso curso) throws DadosException {
@@ -128,13 +127,10 @@ public class CursoJdbc {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(SQL_INSERT);
-            statement.setString(1, curso.getTitulo());
-            statement.setString(2, curso.getTipo().name());
-            java.sql.Date dataSql
-                    = new java.sql.Date(curso.getDataRealizacao().getTime());
-            statement.setDate(3, dataSql);
-            statement.setInt(4, curso.getQtdeHoras());
-            statement.setString(5, curso.getSituacao().name());
+            statement.setString(1, curso.getNomeCurso().name());
+            statement.setString(2, curso.getTipoCurso().name());
+            statement.setInt(3, curso.getCargaHoraria());
+            statement.setString(4, curso.getCodInstituto());
             int qtdeRegistros = statement.executeUpdate();
         } catch (SQLException ex) {
             throw new DadosException(
@@ -144,7 +140,7 @@ public class CursoJdbc {
         }
     }
     private static String SQL_DELETE
-            = "DELETE FROM TB_cursoS WHERE ID = ?;";
+            = "DELETE FROM TB_CURSOS WHERE ID = ?;";
 
     @Override
     public void excluir(Curso curso) throws DadosException {
@@ -152,7 +148,7 @@ public class CursoJdbc {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(SQL_DELETE);
-            statement.setInt(1, curso.getId());
+            statement.setInt(1, curso.getCodCurso());
             int qtdeRegistros = statement.executeUpdate();
         } catch (SQLException ex) {
             throw new DadosException(
@@ -163,8 +159,8 @@ public class CursoJdbc {
     }
 
     private static String SQL_UPDATE
-            = "UPDATE TB_cursoS SET TITULO = ?, TIPO = ? , DATA_REAL = ? , QTDE_HORAS = ? , SITUACAO= ?  WHERE ID = ?;";
-    //1          2            3           4            5                  6
+            = "UPDATE TB_CURSOS SET NOME = ?, TIPO = ? , CARGA_HORARIA = ? , COD_INSTITUTO= ?  WHERE ID = ?;";
+    								//1          2            3           			4            5                  
 
     @Override
     public void atualizar(Curso curso) throws DadosException {
@@ -172,14 +168,11 @@ public class CursoJdbc {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(SQL_UPDATE);
-            statement.setString(1, curso.getTitulo());
-            statement.setString(2, curso.getTipo().name());
-            java.sql.Date dataSql
-                    = new java.sql.Date(curso.getDataRealizacao().getTime());
-            statement.setDate(3, dataSql);
-            statement.setInt(4, curso.getQtdeHoras());
-            statement.setString(5, curso.getSituacao().name());
-            statement.setInt(6, curso.getId());
+            statement.setString(1, curso.getNomeCurso().name());
+            statement.setString(2, curso.getTipoCurso().name());
+            statement.setInt(3, curso.getCargaHoraria());
+            statement.setString(4, curso.getCodInstituto());
+            statement.setInt(5, curso.getCodCurso());
             int qtdeRegistros = statement.executeUpdate();
         } catch (SQLException ex) {
             throw new DadosException(
@@ -196,5 +189,5 @@ public class CursoJdbc {
             instance = new CursoJdbc();
         }
         return instance;
-    }*/
+    }
 }

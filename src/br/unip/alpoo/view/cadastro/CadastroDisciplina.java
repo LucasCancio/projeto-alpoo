@@ -2,17 +2,13 @@ package br.unip.alpoo.view.cadastro;
 
 import javax.swing.JFrame;
 
-public class CadastroDisciplina  extends JFrame {
-	private static CadastroDisciplina instance;
+import br.unip.alpoo.model.Operacoes;
 
-	public static CadastroDisciplina getInstance() {
-		if (instance == null) {
-			instance = new CadastroDisciplina();
-		}
-		return instance;
-	}
+public class CadastroDisciplina  extends JFrame {
 	
-	private CadastroDisciplina() {
+	private Operacoes operacao;
+	public CadastroDisciplina(Operacoes operacao) {
+		this.operacao=operacao;
 		this.setTitle("Cadastro de Disciplinas");
 		this.setSize(800, 300);
 		this.setLocationRelativeTo(null);

@@ -2,39 +2,57 @@ package br.unip.alpoo.model;
 
 public class Curso {
 	private int codCurso;
-	private NomesCursos NomeCurso; //(List com Administração de Empresas, BioMedicina, Ciências Biológicas, Ciencias da Computação, Direito, Educação Física, Farmacologia, Rede de Computadores, Sistemas de Informações,...), 
-	private TipoCurso TipoCurso; //(RadioButton com Bacharel, Gestão, outros),
-	private int CargaHoraria;
-	private int CodInstituto;
-	
+
+	public Curso(int codCurso, NomesCursos nomeCurso, TipoCurso tipoCurso, int cargaHoraria, String codInstituto) {
+		this.codCurso = codCurso;
+		this.nomeCurso = nomeCurso;
+		this.tipoCurso = tipoCurso;
+		this.cargaHoraria = cargaHoraria;
+		this.codInstituto = codInstituto;
+	}
+
+	private NomesCursos nomeCurso;
+	private TipoCurso tipoCurso;
+	private int cargaHoraria;
+	private String codInstituto;
+
 	public int getCodCurso() {
 		return codCurso;
 	}
+
 	public void setCodCurso(int codCurso) {
 		this.codCurso = codCurso;
 	}
+
 	public NomesCursos getNomeCurso() {
-		return NomeCurso;
+		return nomeCurso;
 	}
+
 	public void setNomeCurso(NomesCursos nomeCurso) {
-		NomeCurso = nomeCurso;
+		this.nomeCurso = nomeCurso;
 	}
+
 	public TipoCurso getTipoCurso() {
-		return TipoCurso;
+		return tipoCurso;
 	}
+
 	public void setTipoCurso(TipoCurso tipoCurso) {
-		TipoCurso = tipoCurso;
+		this.tipoCurso = tipoCurso;
 	}
+
 	public int getCargaHoraria() {
-		return CargaHoraria;
+		return cargaHoraria;
 	}
+
 	public void setCargaHorária(int cargaHoraria) {
-		CargaHoraria = cargaHoraria;
+		this.cargaHoraria = cargaHoraria;
 	}
-	public int getCodInstituto() {
-		return CodInstituto;
+
+	public String getCodInstituto() {
+		return codInstituto;
 	}
-	public void setCodInstituto(int codInstituto) {
-		CodInstituto = codInstituto;
+
+	public void setCodInstituto(String codInstituto) {
+		this.codInstituto = codInstituto;
 	}
 }

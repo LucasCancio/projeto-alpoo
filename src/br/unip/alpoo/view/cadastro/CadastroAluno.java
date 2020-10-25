@@ -4,17 +4,13 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-public class CadastroAluno extends JFrame {
-	private static CadastroAluno instance;
+import br.unip.alpoo.model.Operacoes;
 
-	public static CadastroAluno getInstance() {
-		if (instance == null) {
-			instance = new CadastroAluno();
-		}
-		return instance;
-	}
-
-	private CadastroAluno() {
+public class CadastroAluno extends JFrame{
+	
+	private Operacoes operacao;
+	public CadastroAluno(Operacoes operacao) {
+		this.operacao=operacao;
 		this.setTitle("Cadastro de Alunos");
 		this.setSize(800, 300);
 		this.setLocationRelativeTo(null);
