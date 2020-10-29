@@ -36,8 +36,8 @@ public class CursoController {
         }
     }
 
-    public void excluir(Curso curso) throws DadosException {
-        dao.excluir(curso);
+    public void excluirPorId(Integer id) throws DadosException {
+        dao.excluirPorId(id);
     }
 
     public Curso getPorId(Integer id) throws DadosException {

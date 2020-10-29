@@ -44,7 +44,7 @@ public class Curso {
 		return cargaHoraria;
 	}
 
-	public void setCargaHorária(int cargaHoraria) {
+	public void setCargaHoraria(int cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
 

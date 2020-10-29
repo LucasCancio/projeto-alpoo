@@ -11,6 +11,6 @@ public interface ICursoDao {
 	List<Curso> getPorTipo(TipoCurso tipo) throws DadosException;
 	List<Curso> getTodas() throws DadosException;
 	void incluir(Curso curso) throws DadosException;
-	void excluir(Curso curso) throws DadosException;
+	void excluirPorId(Integer id) throws DadosException;
 	void atualizar(Curso curso) throws DadosException;
 }
